@@ -14,7 +14,7 @@ public class ScheduleService {
     private Scheduler scheduler;
 
     @EventListener(ApplicationStartedEvent.class)
-    public void jobInitializer() throws SchedulerException {
+    private void jobInitializer() throws SchedulerException {
         String jobName = "ExampleJobTest";
         JobKey key = new JobKey(jobName, "RegularScheduler");
 
