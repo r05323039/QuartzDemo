@@ -13,7 +13,15 @@ public class ScheduleService {
     @Autowired
     private Scheduler scheduler;
 
-    @EventListener(ApplicationStartedEvent.class)
+    public void create(Class<? extends Job> jobClass, String jobName, String cronExpression) throws SchedulerException {
+        JobKey key = new JobKey(jobName, "RegularScheduler");
+
+        deleteJobIfExists(key);
+
+        cronScheduler(jobClass, jobName, cronExpression);
+    }
+
+/*    @EventListener(ApplicationStartedEvent.class)
     private void jobInitializer() throws SchedulerException {
         String jobName = "ExampleJobTest";
         JobKey key = new JobKey(jobName, "RegularScheduler");
@@ -23,7 +31,7 @@ public class ScheduleService {
         String cronExpression = "* * * * * ? *";
         cronScheduler(ExampleJob.class, jobName, cronExpression);
 
-    }
+    }*/
 
     private void deleteJobIfExists(JobKey key) throws SchedulerException {
         if (scheduler.checkExists(key)) {

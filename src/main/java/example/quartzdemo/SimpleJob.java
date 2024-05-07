@@ -2,7 +2,7 @@ package example.quartzdemo;
 
 import org.quartz.*;
 
-@DisallowConcurrentExecution
+//@DisallowConcurrentExecution
 @PersistJobDataAfterExecution
 public class SimpleJob implements Job {
 
